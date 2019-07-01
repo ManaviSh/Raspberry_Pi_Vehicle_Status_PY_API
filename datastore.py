@@ -146,7 +146,7 @@ while True:
     return readings
 
     def addReading(reading):
-    cursor.execute("INSERT INTO reading (angle_x,angle_y,angle_z,acc_x, acc_y, acc_z,Latitude,Longitude,TimeStamp) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,NOW())", (reading.angle_x,reading.angle_y,reading.angle_z,reading.acc_x,reading.acc_y,reading.acc_z,reading.Latitude,reading.Longitude))
+    cursor.execute("INSERT INTO reading (angle_x,angle_y,angle_z,acc_x, acc_y, acc_z,velocity,Latitude,Longitude,TimeStamp) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,NOW())", (reading.angle_x,reading.angle_y,reading.angle_z,reading.acc_x,reading.acc_y,reading.acc_z,reading.velocity,reading.Latitude,reading.Longitude))
     mariadb_connection.commit()
     return reading
 
