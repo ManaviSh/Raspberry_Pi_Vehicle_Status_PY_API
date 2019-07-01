@@ -73,7 +73,7 @@ def create_reading():
 
         cursor = mariadb_connection.cursor()
 
-        cursor.execute("INSERT INTO reading (TempSensor1,TempSensor2,TempSensor3,TempSensorAvg,Humidity,Pressure,Altitude,SeaLevelPressure,Lux,TimeStamp) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,NOW())", (req_json['TempSensor1'],req_json['TempSensor2'],req_json['TempSensor3'],req_json['TempSensorAvg'],req_json['Humidity'],req_json['Pressure'],req_json['Altitude'],req_json['SeaLevelPressure'],req_json['Lux']))
+        cursor.execute("INSERT INTO reading (angle_x,angle_y,angle_z,Latitude,Longitude,TimeStamp) VALUES (%s,%s,%s,%s,%s,NOW())", (req_json['angle_x'],req_json['angle_y'],req_json['angle_z'],req_json['Latitude'],req_json['Longitude']))
 
         mariadb_connection.commit()
 
