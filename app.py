@@ -15,6 +15,7 @@ app = Flask(__name__)
 
 readings = [
     {
+        'id': 1,
         'angle_x' : Gx, 
         'angle_y' : Gy,
         'angle_z' : Gz,
