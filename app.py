@@ -19,10 +19,13 @@ readings = [
         'angle_x' : Gx, 
         'angle_y' : Gy,
         'angle_z' : Gz,
+        'acc_x' : Gx, 
+        'acc_y' : Gy,
+        'acc_z' : Gz,
+	    'velocity': velocity1,
         'Latitude' : lat_in_degrees,
         'Longitude' : long_in_degrees
         'TimeStamp' : time.strftime("%c")
-    }
  ]
 ## AUTH STUFF ###
 
