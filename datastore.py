@@ -32,8 +32,8 @@ def getReadings(amount):
     # - Get last day
     # - Get last 7 days
     #
-    readings = cursor.execute("SELECT TempSensor1,TempSensor2,TempSensor3,TempSensorAvg,Humidity,Pressure,Altitude,SeaLevelPressure,Lux,TimeStamp FROM weather LIMIT amount")
-    mariadb_connection.commit()
+    #readings = cursor.execute("SELECT TempSensor1,TempSensor2,TempSensor3,TempSensorAvg,Humidity,Pressure,Altitude,SeaLevelPressure,Lux,TimeStamp FROM weather LIMIT amount")
+    #mariadb_connection.commit()
     return readings
 
 def addReading(reading):
