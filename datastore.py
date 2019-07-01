@@ -115,8 +115,8 @@ while True:
     velocity1 =Ay*0.001;
 
 
-    print ("Gx=%.2f" %Gx, u'\u00b0'+ "/s", "\tGy=%.2f" %Gy, u'\u00b0'+ "/s", "\tGz=%.2f" %Gz, u'\u00b0'+ "/s", "\tAx=%.2f g" %Ax, "\tAy=%.2f g" %Ay, "\tAz=%.2f g" %Az) 	
-    sleep(1)
+    #print ("Gx=%.2f" %Gx, u'\u00b0'+ "/s", "\tGy=%.2f" %Gy, u'\u00b0'+ "/s", "\tGz=%.2f" %Gz, u'\u00b0'+ "/s", "\tAx=%.2f g" %Ax, "\tAy=%.2f g" %Ay, "\tAz=%.2f g" %Az) 	
+    
     received_data = (str)(ser.readline())                   #read NMEA string received
     GPGGA_data_available = received_data.find(gpgga_info)   #check for NMEA GPGGA string                 
     if (GPGGA_data_available>0):
@@ -124,8 +124,9 @@ while True:
         NMEA_buff = (GPGGA_buffer.split(','))               #store comma separated data in buffer
         GPS_Info()                                          #get time, latitude, longitude
 
-        print("lat in degrees:", lat_in_degrees," long in degree: ", long_in_degrees, '\n')             #press ctrl+c to plot on map and exit 
+       # print("lat in degrees:", lat_in_degrees," long in degree: ", long_in_degrees, '\n')             #press ctrl+c to plot on map and exit 
         print("------------------------------------------------------------\n")
+    sleep(1)
     readings = [
     {	
 	'id': 1,
