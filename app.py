@@ -5,28 +5,13 @@ import datastore
 import sys
 import mysql.connector as mariadb
 import logging
+import simplejson as json
 logging.basicConfig(filename='api.log',level=logging.DEBUG)
 
-from flask.ext.httpauth import HTTPBasicAuth
+from flask_httpauth import HTTPBasicAuth
 
 auth = HTTPBasicAuth()
 app = Flask(__name__)
-
-readings = [
-    {
-        'id': 1,
-        'TempSensor1': 10,
-        'TempSensor2': 20,
-        'TempSensor3': 30,
-        'TempSensorAvg': 15,
-        'Humidity': 34,
-        'Pressure': 1012,
-        'Altitude': 3.3,
-        'SeaLevelPressure': 394,
-        'Lux': 12.304,
-        'TimeStamp': time.strftime("%c")
-    }
-]
 
 ## AUTH STUFF ###
 
@@ -40,7 +25,10 @@ def get_password(username):
 @auth.error_handler
 def unauthorized():
     return make_response(jsonify({'error': 'Unauthorized access'}), 401)
-
+## 404 handler
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({'error': 'Not found'}), 404)
 
 ## Function to add URI to each requests
 def make_public_reading(reading):
@@ -51,12 +39,6 @@ def make_public_reading(reading):
         else:
             new_reading[field] = reading[field]
     return new_reading
-
-
-## 404 handler
-@app.errorhandler(404)
-def not_found(error):
-    return make_response(jsonify({'error': 'Not found'}), 404)
 
 
 ## Routes
@@ -82,22 +64,6 @@ def create_reading():
     status = 0
     logging.info('Started create_reading()')
 
-# if not request.json or not 'TempSensor1' in request.json:
-# abort(400)
-#reading = [{
-#        "Altitude": request.json['Altitude'],
-#        "Humidity": request.json['Humidity'],
-#        "Lux": request.json['Lux'],
-#        "Pressure": request.json['Pressure'],
-#        "SeaLevelPressure": request.json['SeaLevelPressure'],
-#        "TempSensor1": request.json['TempSensor1'],
-#        "TempSensor2": request.json['TempSensor2'],
-#        "TempSensor3": request.json['TempSensor3'],
-#        "TempSensorAvg": request.json['TempSensorAvg'],
-#        "TimeStamp": "Sun Sep 27 17:07:11 2015",
-#        'id': readings[-1]['id'] + 1,
-        # 'description': request.json.get('description', ""),
-#    }]
 
     req_json = request.get_json()
 
@@ -125,6 +91,20 @@ def create_reading():
 
     # if all is good
     return jsonify({'status': 'succeeded'}), 201
+@app.route('/hello', methods=['POST'])
+def index():
+   mariadb_connection = mariadb.connect(user='username', password='password', database='weather')
+
+        cursor = mariadb_connection.cursor()
+
+        cursor.execute("SELECT * FROM weather.reading")
+
+   row_headers=[x[0] for x in cursor.description] #this will extract row headers
+   rv = cursor.fetchall()
+   json_data=[]
+   for result in rv:
+        json_data.append(dict(zip(row_headers,result)))
+   return json.dumps(json_data)
 
 
 if __name__ == '__main__':
