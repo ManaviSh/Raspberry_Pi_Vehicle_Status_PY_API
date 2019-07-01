@@ -9,7 +9,7 @@ This is an alternative endpoint Endpoint using Python/Flask and MariaDB on a Lin
 This can be run on the Pi itself
 5. Set up MariaDB for the Vehicle Status
   CREATE DATABASE evData;
-  GRANT ALL PRIVILEGES ON weather.* TO web@'%' IDENTIFIED BY 'secretpassword';
+  GRANT ALL PRIVILEGES ON evData.* TO web@'%' IDENTIFIED BY 'secretpassword';
   FLUSH PRIVILEGES;
   quit
 
