@@ -126,7 +126,8 @@ while True:
         print("lat in degrees:", lat_in_degrees," long in degree: ", long_in_degrees, '\n')             #press ctrl+c to plot on map and exit 
         print("------------------------------------------------------------\n")
     readings = [
-    {
+    {	
+	'id': 1,
         'angle_x' : Gx, 
         'angle_y' : Gy,
         'angle_z' : Gz,
