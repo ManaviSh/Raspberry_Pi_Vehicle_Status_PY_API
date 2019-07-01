@@ -13,6 +13,16 @@ from flask_httpauth import HTTPBasicAuth
 auth = HTTPBasicAuth()
 app = Flask(__name__)
 
+readings = [
+    {
+        'angle_x' : Gx, 
+        'angle_y' : Gy,
+        'angle_z' : Gz,
+        'Latitude' : lat_in_degrees,
+        'Longitude' : long_in_degrees
+        'TimeStamp' : time.strftime("%c")
+    }
+ ]
 ## AUTH STUFF ###
 
 @auth.get_password
